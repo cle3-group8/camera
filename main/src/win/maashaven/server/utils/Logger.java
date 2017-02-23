@@ -6,12 +6,12 @@ import java.util.Date;
 
 public class Logger {
 
-    public static void getDateStamp() {
+    public static String getDateStamp() {
         DateFormat dateFormat = new SimpleDateFormat("[HH:mm:ss] ");
-        log(dateFormat.format(new Date()));
+        return dateFormat.format(new Date());
     }
 
     public static void log(String str) {
-        System.out.println(str);
+        System.out.println(getDateStamp() + str);
     }
 }

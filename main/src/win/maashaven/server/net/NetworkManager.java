@@ -6,14 +6,19 @@ import com.corundumstudio.socketio.SocketIOServer;
 public class NetworkManager {
 
     private Configuration config = new Configuration();
-    private SocketIOServer server;
+    private final SocketIOServer server;
 
-    public NetworkManager(Configuration config) {
-        config.setHostname("localhost");
-        config.setPort(1337);
+    public NetworkManager(String hostname, int port) {
+        config.setHostname(hostname);
+        config.setPort(port);
         this.config = config;
 
         this.server = new SocketIOServer(config);
+        server.start();
+    }
+
+    public void attachPacketHandler() {
+
     }
 
     /**
