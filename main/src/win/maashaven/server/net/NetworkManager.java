@@ -7,6 +7,7 @@ public class NetworkManager {
 
     private Configuration config = new Configuration();
     private final SocketIOServer server;
+    private PacketHandler packetHandler;
 
     public NetworkManager(String hostname, int port) {
         config.setHostname(hostname);
@@ -17,8 +18,9 @@ public class NetworkManager {
         server.start();
     }
 
-    public void attachPacketHandler() {
-
+    public void attachPacketHandler(PacketHandler pcktHandler) {
+        this.packetHandler = pcktHandler;
+        this.packetHandler.setSocket(server);
     }
 
     /**
@@ -43,5 +45,12 @@ public class NetworkManager {
      */
     public int getPort() {
         return this.config.getPort();
+    }
+
+    /**
+     * Closes the socket.io server
+     */
+    public void kill() {
+        this.server.stop();
     }
 }
